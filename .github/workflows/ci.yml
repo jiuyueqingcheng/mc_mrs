@@ -6,15 +6,13 @@ on:
   workflow_dispatch:
 
 env:
-  MIHOMO_VERSION:  1.19.3
-  SINGBOX_VERSION: 1.11.0
-  TOOLS_DIR:       data/tools
+  MIHOMO_VERSION: 1.19.3
+  TOOLS_DIR: data/tools
 
 jobs:
   build:
-    name: Build Rules
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       contents: write
 
@@ -25,8 +23,7 @@ jobs:
       - name: Create tools dir
         run: mkdir -p ${{ env.TOOLS_DIR }}
 
-      # 下载 mihomo（转 MRS 用）
-      - name: Download Mihomo
+      - name: Install mihomo
         run: |
           cd ${{ env.TOOLS_DIR }}
           wget -q https://github.com/MetaCubeX/mihomo/releases/download/v${{ env.MIHOMO_VERSION }}/mihomo-linux-amd64-v${{ env.MIHOMO_VERSION }}.gz
@@ -34,34 +31,19 @@ jobs:
           mv mihomo-linux-amd64-v${{ env.MIHOMO_VERSION }} mihomo
           chmod +x mihomo
 
-      # 下载 sing-box（转 SRS 用）
-      - name: Download sing-box
+      # 🔥 核心：自动遍历所有子文件夹的 txt → mrs
+      - name: Convert all txt to mrs
         run: |
-          cd ${{ env.TOOLS_DIR }}
-          wget -q https://github.com/SagerNet/sing-box/releases/download/v${{ env.SINGBOX_VERSION }}/sing-box-${{ env.SINGBOX_VERSION }}-linux-amd64.tar.gz
-          tar xzf sing-box-${{ env.SINGBOX_VERSION }}-linux-amd64.tar.gz
-          mv sing-box-${{ env.SINGBOX_VERSION }}-linux-amd64/sing-box .
-          chmod +x sing-box
-
-      # === 这里开始：不再运行 filter.py ===
-      # 直接转换你的规则 → MRS/SRS
-      - name: Convert to MRS/SRS
-        run: |
-          # 转换 Clash 规则
-          for f in data/rules/*/clash.yaml; do
-            [ -f "$f" ] && ${{ env.TOOLS_DIR }}/mihomo convert-ruleset domain yaml "$f" "${f%.yaml}.mrs"
+          find data/rules -type f -name "*.txt" | while read txt; do
+            out="${txt%.txt}.mrs"
+            ${{ env.TOOLS_DIR }}/mihomo convert-ruleset domain text "$txt" "$out"
+            echo "✅ 转换完成：$txt → $out"
           done
 
-          # 转换 Sing-box 规则
-          for f in data/rules/*/singbox.json; do
-            [ -f "$f" ] && ${{ env.TOOLS_DIR }}/sing-box rule-set compile -o "${f%.json}.srs" "$f"
-          done
-
-      # 自动提交更新
       - name: Commit and push
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add data/rules/ README.md 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "update rules"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/rules/
+          git diff --staged --quiet || git commit -m "Auto convert txt to mrs"
           git push
