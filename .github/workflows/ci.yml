@@ -31,19 +31,19 @@ jobs:
           mv mihomo-linux-amd64-v${{ env.MIHOMO_VERSION }} mihomo
           chmod +x mihomo
 
-      # 🔥 核心：自动遍历所有子文件夹的 txt → mrs
-      - name: Convert all txt to mrs
+      # 🔥 全局遍历：所有目录、所有子文件夹的 .txt → .mrs
+      - name: Convert ALL txt to mrs
         run: |
-          find data/rules -type f -name "*.txt" | while read txt; do
+          find . -type f -name "*.txt" | while read txt; do
             out="${txt%.txt}.mrs"
             ${{ env.TOOLS_DIR }}/mihomo convert-ruleset domain text "$txt" "$out"
-            echo "✅ 转换完成：$txt → $out"
+            echo "✅ 转换：$txt → $out"
           done
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/rules/
-          git diff --staged --quiet || git commit -m "Auto convert txt to mrs"
+          git add .
+          git diff --staged --quiet || git commit -m "Auto convert all txt to mrs"
           git push
