@@ -6494,3 +6494,5 @@ ad-display.diwodiwo.xyz
 anime-rule34-world.b-cdn.net
 misa-prod.s3.ap-northeast-1.amazonaws.com
 widgets.stripst.com
+1470423830.rsc.cdn77.org
+la.btc620.com
