@@ -51,3 +51,4 @@ white.ichinosekotomi.com
 wp.lyezi.cc
 yin.wenjian.de
 yp.lyezi.cc
+emby.fastcdn.dpdns.org
