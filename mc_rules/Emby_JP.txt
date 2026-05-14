@@ -53,5 +53,4 @@ yin.wenjian.de
 yp.lyezi.cc
 emby.fastcdn.dpdns.org
 emby.n150.asia
-1470423830.rsc.cdn77.org
-la.btc620.com
+
