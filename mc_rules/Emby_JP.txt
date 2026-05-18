@@ -16,7 +16,6 @@ ch.feiyue.lol
 chpro.feiyue.lol
 eb.zzm.li
 emby.bangumi.ca
-emby.feiniu.lol
 emby.heisi.org
 emby.hohai.eu.org
 emby.ichinosekotomi.com
