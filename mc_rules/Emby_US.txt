@@ -11,3 +11,4 @@ test.28.al
 book.alphatvapp.top
 push.apple.com
 ciallo.party
+emby.feiniu.lol
