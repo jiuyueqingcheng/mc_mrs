@@ -12,3 +12,4 @@ book.alphatvapp.top
 push.apple.com
 ciallo.party
 emby.feiniu.lol
+run.freecloud.ltd
