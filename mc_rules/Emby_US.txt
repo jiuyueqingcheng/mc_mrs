@@ -14,3 +14,4 @@ ciallo.party
 emby.feiniu.lol
 run.freecloud.ltd
 test.inemby.us.ci
+yusen.cyou
