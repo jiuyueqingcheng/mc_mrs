@@ -16,3 +16,4 @@ run.freecloud.ltd
 test.inemby.us.ci
 yusen.cyou
 test.inemby.us.ci
+emby.n150.asia
