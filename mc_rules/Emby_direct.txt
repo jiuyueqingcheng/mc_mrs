@@ -5,7 +5,7 @@ bai1.yezi.my
 bai3.yezi.my
 bai6.yezi.my
 fandai.cnvip.ddns-ip.net
-#xf.isvip.ddns-ip.net
+xf.isvip.ddns-ip.net
 ap-cn01.emby.bangumi.ca
 ap-cn02.emby.bangumi.ca
 emby666.alien666.de5.net
