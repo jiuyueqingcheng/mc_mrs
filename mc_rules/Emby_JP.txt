@@ -20,7 +20,6 @@ emby.heisi.org
 emby.hohai.eu.org
 emby.ichinosekotomi.com
 emby.istyboe.top
-emby.n150.asia
 emby.zhousanwan.xyz
 fych.feiyue.lol
 gousen.cc.cd
