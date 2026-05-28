@@ -17,3 +17,4 @@ test.inemby.us.ci
 yusen.cyou
 test.inemby.us.ci
 emby.n150.asia
+fworks-emby.sylu.cc
